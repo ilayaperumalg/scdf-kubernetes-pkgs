@@ -1,0 +1,23 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: scdf-server
+upstream:
+  type: git
+  git:
+    commit: 1b216ed6ec9c026ef869f7ce4a7d639d6d97d721
+    repo: https://github.com/ilayaperumalg/scdf-kubernetes
+    directory: config/server
+    ref: master
+openAPI:
+  definitions:
+    io.k8s.cli.setters.replicas:
+      x-k8s-cli:
+        setter:
+          name: replicas
+          value: "2"
+    io.k8s.cli.setters.image:
+      x-k8s-cli:
+        setter:
+          name: image
+          value: scdf:2.5.0.BUILD-SNAPSHOT
